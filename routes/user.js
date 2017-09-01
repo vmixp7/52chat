@@ -1,20 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require( 'mongoose' );
-var Schema   = mongoose.Schema;
-var user = new Schema({
-    name: Number,
-    sex : String,
-    email: {type: String,required: true,unique: true},
-    passwd: String,
-    ip: String,
-    updated_at: Date
-});
-var connection = mongoose.createConnection(_dburl, {
-  useMongoClient: true,
-});
+var User = mongoose.model( 'user');
 
-var User = connection.model('user',user);
+// mongoose.Promise = global.Promise;
+// var connection = mongoose.createConnection(_dburl, {
+//   useMongoClient: true,
+// });
+// var User = connection.model('user',user);
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -40,9 +34,11 @@ router.post('/create', function(req, res, next) {
 
   User(req.body).save( function( err, data, count ){
     if(err){
+      console.log('add user err',err);
       return res.redirect('/register?error=1');
     }
     if(!data){
+      console.log('add user null',data);
       return res.redirect('/register?error=1');
     }
     console.log('add ok',data);

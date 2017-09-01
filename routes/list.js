@@ -50,7 +50,7 @@ router.get('/',_fn.chkLogin,function(req, res, next) {
 			})
 			return val;
 		})
-		console.log("result.chat",result.chat);
+		console.log("result.chat--",result.chat);
 		var obj = {
 			title:_config.title,
 			cate:result.cate,
@@ -124,4 +124,3 @@ router.get('/api/list',function(req, res, next) {
 
 
 module.exports = router;
-

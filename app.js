@@ -11,8 +11,6 @@ async = require('async');
 _ = require('underscore-node');
 _fn = require('./inc/function.js');
 _config = require('./inc/config.js');
-_dburl = 'mongodb://localhost:27017/chat_db';
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

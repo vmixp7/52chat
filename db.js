@@ -1,5 +1,14 @@
 var mongoose = require( 'mongoose' );
+var Schema   = mongoose.Schema;
 
+var user = new Schema({
+    name: String,
+    sex : String,
+    email: {type: String,required: true,unique: true},
+    passwd: String,
+    ip: String,
+    updated_at: Date
+});
 
 var log = new Schema({
     account    	: String,
@@ -12,7 +21,7 @@ var room = new Schema({
 	email    	: String,
 	name		: String,
 	ip    		: String,
-    updated_at 	: Date
+  updated_at 	: Date
 });
 
 var chat = new Schema({
@@ -35,10 +44,4 @@ mongoose.model( 'room', room );
 mongoose.model( 'cate', cate );
 mongoose.model( 'chat', chat );
 
-mongoose.Promise = global.Promise;
-
-
-
-
-
-// mongoose.connect( 'mongodb://arlen:2iuixigi@localhost:27017/chat_db' );
+mongoose.connect( 'mongodb://arlen:2iuixigi@localhost:27017/chat_db' );

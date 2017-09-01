@@ -4,6 +4,58 @@ var mongoose = require( 'mongoose' );
 var User = mongoose.model( 'user');
 var Room = mongoose.model( 'room');
 var Log = mongoose.model( 'log' );
+var Cate = mongoose.model( 'cate');
+var Chat = mongoose.model( 'chat');
+
+router.post('/chat/create', function(req, res, next) {
+	console.log("all:",req.body);
+	var cateName 	= req.body.cateName;
+	var obj = {
+	    name    : req.body.name,
+	    cate    : req.body.cate,
+	    number  : req.body.number,
+	    room    : req.body.room,
+	    sex     : req.body.sex,
+	    updated_at : Date.now()
+	}
+	Chat(obj).save( function( err, data, count ){
+		if(err) return res.json({"err":err});
+		res.json(data);
+	});
+});
+
+router.get('/cate/create', function(req, res, next) {
+	console.log("all:",req.body);
+	var cateName 	= req.body.cateName;
+	var obj = {
+		cateName   : cateName,
+		updated_at : Date.now()
+	}
+	Cate(obj).save( function( err, data, count ){
+		if(err) return res.json({"err":err});
+		res.json(data);
+	});
+});
+
+router.get('/cate/find', function(req, res, next) {
+	Cate.find( function( err, data, count ){
+		if(err) return res.json({"err":err});
+		res.json(data);
+	});
+});
+
+router.post('/cate/update', function(req, res, next) {
+	console.log("all:",req.body);
+	var $cateName 	= req.body.cateName;
+	var obj = {
+		cateName   : $cateName
+	}
+	Cate.update({_id:req.body.id},obj,function( err, data, count ){
+		if(err) return res.json({"err":err});
+		res.json(data);
+	});
+	// res.json(req.body);
+});
 
 router.get('/room/create', function(req, res, next) {
 
