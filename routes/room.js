@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 require( '../db' );
-mongoose.model( 'room', room );
 var Room = connection.model('room');
 
 router.get('/find', function(req, res, next){
