@@ -28,14 +28,14 @@ router.post('/create', function(req, res, next) {
 	req.body.ip = ipv6_client_ip;
 	req.body.updated_at = Date.now();
 
-  var gnr = new User(req.body);
+  var query = new User(req.body);
 
-	var promise = gnr.save();
-  assert.ok(promise instanceof require('mpromise'));
-  promise.then(function (doc) {
-    console.log("doc",doc);
-    assert.equal(doc.name, "Guns N' Roses");
-  });
+	mongoose.Promise = global.Promise;
+  assert.equal(query.save().constructor, global.Promise);
+  // promise.then(function (doc) {
+  //   console.log("doc",doc);
+  //   assert.equal(doc.name, "Guns N' Roses");
+  // });
 
 		// if(err){
 		// 	return res.redirect('/register?error=1');
