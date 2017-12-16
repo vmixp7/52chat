@@ -1,14 +1,5 @@
 var mongoose = require( 'mongoose' );
-var Schema   = mongoose.Schema;
 
-var user = new Schema({
-    name: Number,
-    sex : String,
-    email: {type: String,required: true,unique: true},
-    passwd: String,
-    ip: String,
-    updated_at: Date
-});
 
 var log = new Schema({
     account    	: String,
@@ -38,7 +29,7 @@ var cate = new Schema({
     updated_at 	: Date
 });
 
-// mongoose.model( 'user', user );
+mongoose.model( 'user', user );
 mongoose.model( 'log', log );
 mongoose.model( 'room', room );
 mongoose.model( 'cate', cate );
