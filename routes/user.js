@@ -16,9 +16,7 @@ router.get('/find', function(req, res, next) {
 });
 
 router.post('/create', function(req, res, next) {
-	// console.log("req",req.body);
-	// if(!req.body) return req.send(404);
-	console.log("all:",req.body);
+
 	var ff = "::ffff:";
 	var client_ip = req.ip;
 	var ipv6_client_ip = client_ip.replace(ff,"");
@@ -26,9 +24,9 @@ router.post('/create', function(req, res, next) {
 
 	req.body.ip = ipv6_client_ip;
 	req.body.updated_at = Date.now();
-
+console.log('qqqqqqqq',req.body);
 	User(req.body).save( function( err, data, count ){
-
+console.log('111',err,data, count);
 		if(err){
           console.log('eee');
 			return res.redirect('/register?error=1');
