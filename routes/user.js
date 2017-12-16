@@ -1,18 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require( 'mongoose' );
-
-
-var schema = new mongoose.Schema({
-    name: String,
-    sex : String,
-    email: {type: String,required: true,unique: true},
-    passwd: String,
-    ip: String,
-    updated_at: Date
-});
-
-var User = mongoose.model('Tank', schema);
+// var User = mongoose.model( 'user');
+var User = connection.model('user');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -34,21 +24,25 @@ router.post('/create', function(req, res, next) {
 	console.log("ip:",ipv6_client_ip);
 
 	req.body.ip = ipv6_client_ip;
-	req.body.updated_at = '2017-12-12';//Date.now();
+	req.body.updated_at = '2017-12-12'//Date.now();
 console.log('qqqqqqqq',req.body);
-	User(req.body).save( function( err, data, count ){
-console.log('111',err,data, count);
-		if(err){
-          console.log('eee');
-			return res.redirect('/register?error=1');
-		}
-		if(!data){
-          console.log('no data');
-			return res.redirect('/register?error=1');
-		}
-    console.log('add ok',data);
-		res.redirect('/login');
-	});
+
+
+    //   /* Use `db`, for instance `db.model()`
+    User(req.body).save( function( err, data, count ){
+      console.log('111',err,data, count);
+      if(err){
+        console.log('eee');
+        return res.redirect('/register?error=1');
+      }
+      if(!data){
+        console.log('no data');
+        return res.redirect('/register?error=1');
+      }
+      console.log('add ok',data);
+      res.redirect('/login');
+    });
+
 });
 
 router.post('/delete', function(req, res, next) {
