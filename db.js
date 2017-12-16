@@ -49,6 +49,7 @@ mongoose.Promise = global.Promise;
 var connection = mongoose.createConnection('mongodb://localhost:27017/chat_db', {
   useMongoClient: true,
 });
+connection.then(function(db))
 
 
 // mongoose.connect( 'mongodb://arlen:2iuixigi@localhost:27017/chat_db' );
