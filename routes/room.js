@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 require( '../db' );
-var Room = connection.model('room');
+var Room = connection.model('room',room);
 
 router.get('/find', function(req, res, next){
 	Room.find( function ( err, user, count ){
