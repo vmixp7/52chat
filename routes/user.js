@@ -35,6 +35,7 @@ router.post('/create', function(req, res, next) {
 		if(!data){
 			return res.redirect('/register?error=1');
 		}
+    console.log("create user ok",data);
 		res.redirect('/login');
 	});
 });
