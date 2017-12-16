@@ -23,7 +23,7 @@ router.post('/create', function(req, res, next) {
 	console.log("ip:",ipv6_client_ip);
 
 	req.body.ip = ipv6_client_ip;
-	req.body.updated_at = Date.now();
+	req.body.updated_at = '2017-12-12';//Date.now();
 console.log('qqqqqqqq',req.body);
 	User(req.body).save( function( err, data, count ){
 console.log('111',err,data, count);
