@@ -1,14 +1,14 @@
 var mongoose = require( 'mongoose' );
 var Schema   = mongoose.Schema;
 
-var user = new Schema({
-    name: String,
-    sex : String,
-    email: {type: String,required: true,unique: true},
-    passwd: String,
-    ip: String,
-    updated_at: Date
-});
+// var user = new Schema({
+//     name: String,
+//     sex : String,
+//     email: {type: String,required: true,unique: true},
+//     passwd: String,
+//     ip: String,
+//     updated_at: Date
+// });
 
 var log = new Schema({
     account    	: String,
