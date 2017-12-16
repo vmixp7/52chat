@@ -1,4 +1,5 @@
 var express = require('express');
+var assert = require('assert');
 var router = express.Router();
 var mongoose = require( 'mongoose' );
 var User = mongoose.model( 'user');
