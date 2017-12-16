@@ -2,11 +2,7 @@ require( '../db' );
 var express = require('express');
 var router = express.Router();
 var mongoose = require( 'mongoose' );
-// var User = mongoose.model( 'user');
-var connection = mongoose.createConnection('mongodb://localhost:27017/chat_db', {
-  useMongoClient: true,
-});
-var User = connection.model('user');
+var User = connection.model('user',user);
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
