@@ -1,11 +1,12 @@
+require( './db' );
 var express = require('express');
 var router = express.Router();
 var mongoose = require( 'mongoose' );
-var User = mongoose.model( 'user');
-// var connection = mongoose.createConnection('mongodb://localhost:27017/chat_db', {
-//   useMongoClient: true,
-// });
-// var User = connection.model('user');
+// var User = mongoose.model( 'user');
+var connection = mongoose.createConnection('mongodb://localhost:27017/chat_db', {
+  useMongoClient: true,
+});
+var User = connection.model('user');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -27,24 +28,19 @@ router.post('/create', function(req, res, next) {
 	console.log("ip:",ipv6_client_ip);
 
 	req.body.ip = ipv6_client_ip;
-	req.body.updated_at = '2017-12-12'//Date.now();
-console.log('qqqqqqqq',req.body);
+	req.body.updated_at = Date.now();
 
-
-    //   /* Use `db`, for instance `db.model()`
-    User(req.body).save( function( err, data, count ){
-      console.log('111',err,data, count);
-      if(err){
-        console.log('eee');
-        return res.redirect('/register?error=1');
-      }
-      if(!data){
-        console.log('no data');
-        return res.redirect('/register?error=1');
-      }
-      console.log('add ok',data);
-      res.redirect('/login');
-    });
+  User(req.body).save( function( err, data, count ){
+    console.log('111',err,data, count);
+    if(err){
+      return res.redirect('/register?error=1');
+    }
+    if(!data){
+      return res.redirect('/register?error=1');
+    }
+    console.log('add ok',data);
+    res.redirect('/login');
+  });
 
 });
 
