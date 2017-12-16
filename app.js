@@ -21,7 +21,7 @@ app.set('trust proxy', 1) // trust first proxy
 app.use(session({
   secret: 'fhyq9w8y23432g4y3',
   resave: true,
-  saveUninitialized:true,  
+  saveUninitialized:true,
   cookie: { maxAge: 360000 }//1小時
 }))
 
