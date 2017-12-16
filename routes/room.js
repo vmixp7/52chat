@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-require( '../db' );
-var Room = connection.model('room',room);
+var mongoose = require( 'mongoose' );
+var Room = mongoose.model( 'cate');
 
 router.get('/find', function(req, res, next){
 	Room.find( function ( err, user, count ){
