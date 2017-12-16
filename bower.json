@@ -1,0 +1,21 @@
+{
+  "name": "17chat",
+  "description": "",
+  "main": "",
+  "authors": [
+    "arlen_lin <vmixp7@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/vmixp7/17chat",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "sweetalert2": "^7.1.0"
+  }
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title><%= title %></title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="icon" sizes="192x192" href="/src/images/webrtc-icon-192x192.png">
+<link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/src/css/main.css">
+<link rel="icon" href="/images/favicon.ico">
+<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/css/nivo-slider.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/style-mobile.css" media="screen and (max-width: 480px)" />
+<script type="text/javascript" src="/js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/jquery.nivo.slider.js"></script>
+<script type="text/javascript" src="/js/script.js"></script>
+<script type="text/javascript" src="/js/function.js"></script>
+</head>
+<body onload="reHeight();">
+	<ul class="menu_list">
+		<li><a href="/" onClick="menu();">首頁</a></li>
+		<li><a href="/" onClick="menu()">聊天室列表</a></li>
+		<li><a href="/" onClick="menu()">建立聊天室</a></li>
+		<li><a href="/" onClick="menu()">......</a></li>
+		<li><a href="/" onClick="menu()">......</a></li>
+		<li><a href="/" onClick="menu()">......</a></li>
+		<li><a href="/api/logout" onClick="menu()">登出</a></li>
+	</ul>
+	<div class="head"><a class="menu" href="javascript:;" onclick="menu()"></a><%= title %></div>

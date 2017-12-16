@@ -1,0 +1,17 @@
+<% include header %>
+    <div id="login" class="container mainblock">
+		<h2 class="form-signin-heading">建立帳號</h2>
+		<form class="form-signin" data-toggle="validator" action="/user/create" method="POST">
+		<input type="email" id="email" name="email" class="form-control" placeholder="信箱" required autofocus>
+		<input type="password" id="passwd" name="passwd" class="form-control" placeholder="密碼" required autofocus>
+		<input type="password" id="confirm_pwd" class="form-control" placeholder="確認密碼" required autofocus>
+        <input type="text" id="name" name="name" class="form-control" placeholder="暱稱" required autofocus>
+		<label for="blankRadio1">男 </label>
+		<input type="radio" name="sex" id="blankRadio1" value="1" aria-label="..." checked>
+		<label for="blankRadio2">女 </label>
+		<input type="radio" name="sex" id="blankRadio2" value="2" aria-label="...">
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+		</form>
+		<div class="row"><p class="text-center"><%= (req.param("error") == 1)?"註冊失敗":"" %></p></div>
+	</div>
+<% include footer %>

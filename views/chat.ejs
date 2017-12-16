@@ -1,0 +1,190 @@
+<% include header %>
+<script type="text/javascript" src="/js/jquery-3.1.0.min.js"></script>
+<script src="https://simplewebrtc.com/latest-v2.js"></script>
+<script type="text/javascript" src="/js/socket/socket.io.js"></script>
+</head>
+<body>
+</style>
+<div id="container" class="mainblock">
+
+	<div class="broadcast" ></div>
+
+	<div id="content">
+		<div id="myVideo">
+			<button type="image" id="pauseAudio" ></button><br>
+			<button type="image" id="pauseVideo" ></button>
+		</div>
+		<video id="localVideo"></video>
+		<div id="remotesVideos"></div>
+		<div id="remotes"></div>
+		<div id="message_block">
+			<ul id="messages"></ul>
+		</div>
+	</div>
+	<div class="form-group">
+		<input type="text" class="form-control" id="m" placeholder="輸入訊息"><button id="send">Send</button>
+	</div>
+	<!--<input id="m" autocomplete="off" />-->
+</div>
+
+<% include footer %>
+<script>
+var socket = io();
+var sessName = '<%= (session.user) ? session.user.name:"" %>';
+var sessEmail = '<%= (session.user) ? session.user.email:"" %>';
+var sessSex = '<%= (session.user) ? session.user.sex:"" %>';
+var sessIp = '<%= (session.user) ? session.user.ip:"" %>';
+var roomId = '<%= data.id %>';
+log("room",roomId);
+log( "sessName",sessName );
+
+$(document).ready(function(){
+
+	if(sessName){
+		 var sex = (sessSex == "1")?"男":"女";
+		 name = sessName+"("+sex+")";
+	}else{
+		var name = prompt("請輸入暱稱","guest");
+		if(name=="" || name==null){
+		  name = "guest";
+		}
+	}
+	var userData = {
+		room:roomId,
+		email:sessEmail,
+		name:name,
+		ip:sessIp
+	}
+	/*tell server*/
+	socket.emit("add user",userData);
+
+	/*監聽新訊息事件*/
+	socket.on('chat message', function(data){
+	  appendMessage(data);
+	});
+
+	socket.on('add user',function(data){
+		appendUser(data.username+"已加入");
+	});
+
+	socket.on('user left',function(data){
+		log("left",data);
+		appendUser(data.user.name+"已離開");
+	});
+
+	$('#send').click(function(){
+		var text = $('#m').val();
+		var msg = inputFilter(text);
+		socket.emit('chat message', msg);
+		$('#m').val('');
+		return false;
+	});
+
+	$("#m").keydown(function(event){
+	  if ( event.which == 13 ){
+		$('#send').click();
+	  }
+	});
+
+	function appendMessage(data){
+		var sex = data.username.substr(-2,1);
+		log("sex",sex);
+		var sexClass = (sex == "男")?"boy":"girl";
+		var msg = data.username+":"+data.msg;
+	  $('#messages').append('<li><span class="'+sexClass+'">'+msg+'</span></li>');
+	  var message = document.getElementById("message_block");
+	  message.scrollTop = message.scrollHeight;
+	}
+
+	function appendUser(msg){
+	  $('.broadcast').html(msg);
+	  var message = document.getElementById("message_block");
+	  message.scrollTop = message.scrollHeight;
+	}
+
+	var webrtc = new SimpleWebRTC({
+	  /*the id/element dom element that will hold "our" video*/
+	  localVideoEl: 'localVideo',
+	  /*the id/element dom element that will hold remote videos*/
+	  remoteVideosEl: '',
+	  /*immediately ask for camera access*/
+	  autoRequestMedia: true,
+	  nick: sessName
+	});
+
+	// /*we have to wait until it's ready*/
+	webrtc.on('readyToCall', function () {
+	  // /*you can name it anything*/
+	  webrtc.joinRoom(roomId);
+	});
+
+	webrtc.on('videoAdded', function (video, peer) {
+		log('video added', peer);
+		var remotes = document.getElementById('remotes');
+		if (remotes) {
+			var container = document.createElement('div');
+			container.className = 'videoContainer';
+			container.id = 'container_' + webrtc.getDomId(peer);
+			container.appendChild(video);
+
+			// /*suppress contextmenu*/
+			video.oncontextmenu = function () { return false; };
+
+			remotes.appendChild(container);
+		}
+	});
+	// /*a peer video was removed*/
+	webrtc.on('videoRemoved', function (video, peer) {
+		log('video removed ', peer);
+		var remotes = document.getElementById('remotes');
+		var el = document.getElementById(peer ? 'container_' + webrtc.getDomId(peer) : 'localScreenContainer');
+		if (remotes && el) {
+			remotes.removeChild(el);
+		}
+	});
+
+	$("#pauseVideo").on("click",function(){
+		log("111");
+		if($(this).hasClass("pause")){
+			webrtc.resumeVideo();
+			$(this).removeClass("pause");
+		}else{
+			webrtc.pauseVideo();
+			$(this).addClass("pause");
+		}
+	})
+
+	$("#pauseAudio").on("click",function(){
+		log("222");
+		if($(this).hasClass("pause")){
+			webrtc.unmute()
+			$(this).removeClass("pause");
+		}else{
+			webrtc.mute()
+			$(this).addClass("pause");
+		}
+	})
+
+	/*local mute/unmute events*/
+	webrtc.on('audioOn', function () {
+		// /*your local audio just turned on*/
+		log("audioOn");
+	});
+	webrtc.on('audioOff', function () {
+		/* your local audio just turned off*/
+			log("audioOff");
+	});
+	webrtc.on('videoOn', function () {
+		/* local video just turned on*/
+			log("videoOn");
+	});
+	webrtc.on('videoOff', function () {
+		/* local video just turned off*/
+			log("videoOff");
+	});
+
+
+});
+
+
+</script>

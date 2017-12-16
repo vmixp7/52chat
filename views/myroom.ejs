@@ -1,0 +1,21 @@
+<% include header %>
+    <div class="container mainblock">
+      <form class="form-signin" data-toggle="validator" action="/chat/create" method="POST">
+        <h2 class="form-signin-heading">建立專屬聊天室</h2>
+        <select class="form-control" name="cate" required>
+			<option value="">聊天室類別</option>
+			<% for(var i in data){ %>
+			<option value="<%= data[i]._id %>"><%= data[i].cateName %></option>
+			<% } %>
+		</select>
+        <input type="text" id="room" name="room" class="form-control" placeholder="主題" required>
+        <input type="text" pattern="^[0-9]{1,}$" maxlength="1" id="number" name="number" class="form-control" placeholder="包廂人數" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+    </div>
+<% include footer %>

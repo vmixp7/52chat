@@ -1,0 +1,28 @@
+<% include header %>
+    <div id="login" class="container mainblock">
+		<form class="form-horizontal" data-toggle="validator" action="/user/sigin" method="POST">
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="email" id="email" name="email" class="form-control input-lg" placeholder="信箱" required autofocus>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input type="password" id="password" name="passwd" class="form-control input-lg" placeholder="密碼" required autofocus>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
+				</div>
+			</div>
+		</form>
+		<p></p>
+		<div class="row">
+			<div class="text-center">
+			<a href="/register" />註冊</a>
+			</div>
+		</div>
+		<div class="row"><p class="text-center"><%= (error == 1)?"帳號密碼錯誤":"" %></p></div>
+	</div>
+<% include footer %>
