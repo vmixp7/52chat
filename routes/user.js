@@ -4,7 +4,6 @@ var mongoose = require( 'mongoose' );
 var connection = mongoose.createConnection('mongodb://localhost:27017/chat_db', {
   useMongoClient: true,
 });
-require('../db');
 var User = connection.model('user',user);
 
 /* GET users listing. */
