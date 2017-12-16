@@ -1,6 +1,6 @@
+require( '../db' );
 var express = require('express');
 var router = express.Router();
-require( '../db' );
 var User = connection.model('user',user);
 
 /* GET users listing. */
