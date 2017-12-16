@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require( 'mongoose' );
-var User = mongoose.model( 'user');
+
 
 var schema = new mongoose.Schema({
     name: String,
