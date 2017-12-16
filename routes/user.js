@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require( 'mongoose' );
-require('../db');
+var connection = mongoose.createConnection('mongodb://localhost:27017/chat_db', {
+  useMongoClient: true,
+});
 var User = connection.model('user');
 
 /* GET users listing. */

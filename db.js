@@ -2,7 +2,7 @@ var mongoose = require( 'mongoose' );
 var Schema   = mongoose.Schema;
 
 var user = new Schema({
-    name: String,
+    name: Number,
     sex : String,
     email: {type: String,required: true,unique: true},
     passwd: String,
@@ -38,7 +38,7 @@ var cate = new Schema({
     updated_at 	: Date
 });
 
-mongoose.model( 'user', user );
+// mongoose.model( 'user', user );
 mongoose.model( 'log', log );
 mongoose.model( 'room', room );
 mongoose.model( 'cate', cate );
@@ -46,9 +46,7 @@ mongoose.model( 'chat', chat );
 
 mongoose.Promise = global.Promise;
 
-var connection = mongoose.createConnection('mongodb://localhost:27017/chat_db', {
-  useMongoClient: true,
-});
+
 
 
 
