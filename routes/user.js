@@ -30,11 +30,14 @@ router.post('/create', function(req, res, next) {
 	User(req.body).save( function( err, data, count ){
 
 		if(err){
+          console.log('eee');
 			return res.redirect('/register?error=1');
 		}
 		if(!data){
+          console.log('no data');
 			return res.redirect('/register?error=1');
 		}
+    console.log('add ok',data);
 		res.redirect('/login');
 	});
 });
