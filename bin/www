@@ -12,9 +12,9 @@ var Room = mongoose.model('room');
  * Get port from environment and store in Express.
 */
 
-var port = normalizePort(process.env.PORT || '1337');
+var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-// app.set('httpsport', '3001');
+app.set('httpsport', '3001');
 
 
 /**
@@ -22,7 +22,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-// var httpsServer = https.createServer(ssl.options, app).listen(app.get('httpsport'));
+var httpsServer = https.createServer(ssl.options, app).listen(app.get('httpsport'));
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -99,7 +99,6 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-	console.log('onError---',error);
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -128,7 +127,6 @@ function onError(error) {
  */
 
 function onListening() {
-	console.log('onListening---');
   var addr = server.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
