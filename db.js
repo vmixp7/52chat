@@ -1,4 +1,3 @@
-require( './db' );
 var mongoose = require( 'mongoose' );
 var Schema   = mongoose.Schema;
 
@@ -39,9 +38,7 @@ var cate = new Schema({
     updated_at 	: Date
 });
 
-// mongoose.model( 'user', user );
 mongoose.model( 'log', log );
-mongoose.model( 'room', room );
 mongoose.model( 'cate', cate );
 mongoose.model( 'chat', chat );
 

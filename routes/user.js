@@ -1,7 +1,6 @@
-require( '../db' );
 var express = require('express');
 var router = express.Router();
-var mongoose = require( 'mongoose' );
+require( '../db' );
 var User = connection.model('user',user);
 
 /* GET users listing. */
@@ -27,7 +26,6 @@ router.post('/create', function(req, res, next) {
 	req.body.updated_at = Date.now();
 
   User(req.body).save( function( err, data, count ){
-    console.log('111',err,data, count);
     if(err){
       return res.redirect('/register?error=1');
     }
