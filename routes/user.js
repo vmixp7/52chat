@@ -1,5 +1,4 @@
 var express = require('express');
-var assert = require('assert');
 var router = express.Router();
 var mongoose = require( 'mongoose' );
 var User = mongoose.model( 'user');
@@ -28,24 +27,16 @@ router.post('/create', function(req, res, next) {
 	req.body.ip = ipv6_client_ip;
 	req.body.updated_at = Date.now();
 
-  var query = new User(req.body);
+	User(req.body).save( function( err, data, count ){
 
-	mongoose.Promise = global.Promise;
-  assert.equal(query.save().constructor, global.Promise);
-  // promise.then(function (doc) {
-  //   console.log("doc",doc);
-  //   assert.equal(doc.name, "Guns N' Roses");
-  // });
-
-		// if(err){
-		// 	return res.redirect('/register?error=1');
-		// }
-		// if(!data){
-		// 	return res.redirect('/register?error=1');
-		// }
-    // console.log("create user ok",data);
-		// res.redirect('/login');
-	// });
+		if(err){
+			return res.redirect('/register?error=1');
+		}
+		if(!data){
+			return res.redirect('/register?error=1');
+		}
+		res.redirect('/login');
+	});
 });
 
 router.post('/delete', function(req, res, next) {

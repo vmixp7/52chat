@@ -43,7 +43,7 @@ mongoose.model( 'log', log );
 mongoose.model( 'room', room );
 mongoose.model( 'cate', cate );
 mongoose.model( 'chat', chat );
-
+mongoose.Promise = global.Promise;
 // mongoose.connect( 'mongodb://arlen:2iuixigi@localhost:27017/chat_db' );
 mongoose.createConnection('mongodb://arlen:2iuixigi@localhost:27017/chat_db', {
   useMongoClient: true,
