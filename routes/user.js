@@ -27,17 +27,24 @@ router.post('/create', function(req, res, next) {
 	req.body.ip = ipv6_client_ip;
 	req.body.updated_at = Date.now();
 
-	User(req.body).save( function( err, data, count ){
+  var gnr = new User(req.body);
 
-		if(err){
-			return res.redirect('/register?error=1');
-		}
-		if(!data){
-			return res.redirect('/register?error=1');
-		}
-    console.log("create user ok",data);
-		res.redirect('/login');
-	});
+	var promise = gnr.save();
+  assert.ok(promise instanceof require('mpromise'));
+  promise.then(function (doc) {
+    console.log("doc",doc);
+    assert.equal(doc.name, "Guns N' Roses");
+  });
+
+		// if(err){
+		// 	return res.redirect('/register?error=1');
+		// }
+		// if(!data){
+		// 	return res.redirect('/register?error=1');
+		// }
+    // console.log("create user ok",data);
+		// res.redirect('/login');
+	// });
 });
 
 router.post('/delete', function(req, res, next) {
