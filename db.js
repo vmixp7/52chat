@@ -48,10 +48,11 @@ mongoose.Promise = global.Promise;
 mongoose.createConnection('mongodb://arlen:2iuixigi@localhost:27017/chat_db', {
   useMongoClient: true,
 });
-// promise.then(function(db) {
-  /* Use `db`, for instance `db.model()`
+promise.then(function(db) {
+//   /* Use `db`, for instance `db.model()`
+  console.log('okkkk',db);
 });
 // Or, if you already have a connection
-connection.openUri('mongodb://localhost/myapp', { /* options */
+// connection.openUri('mongodb://localhost/myapp', { /* options */
 // });
 // mongoose.connect( 'mongodb://arlen:2iuixigi@localhost:27017/chat_db' );
