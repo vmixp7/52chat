@@ -3,6 +3,17 @@ var router = express.Router();
 var mongoose = require( 'mongoose' );
 var User = mongoose.model( 'user');
 
+var schema = new mongoose.Schema({
+    name: String,
+    sex : String,
+    email: {type: String,required: true,unique: true},
+    passwd: String,
+    ip: String,
+    updated_at: Date
+});
+
+var User = mongoose.model('Tank', schema);
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');

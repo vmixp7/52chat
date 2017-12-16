@@ -38,6 +38,11 @@ var cate = new Schema({
     updated_at 	: Date
 });
 
+// mongoose.model( 'user', user );
+mongoose.model( 'log', log );
+mongoose.model( 'room', room );
+mongoose.model( 'cate', cate );
+mongoose.model( 'chat', chat );
 
 mongoose.Promise = global.Promise;
 // mongoose.connect( 'mongodb://arlen:2iuixigi@localhost:27017/chat_db' );
@@ -45,12 +50,6 @@ var promise = mongoose.createConnection('mongodb://localhost:27017/chat_db', {
   useMongoClient: true,
 });
 promise.then(function(db) {
-  console.log('connect db ok');
-  db.model( 'user', user );
-  db.model( 'log', log );
-  db.model( 'room', room );
-  db.model( 'cate', cate );
-  db.model( 'chat', chat );
 //   /* Use `db`, for instance `db.model()`
   // console.log('okkkk',db);
 });
