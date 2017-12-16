@@ -45,9 +45,10 @@ mongoose.model( 'cate', cate );
 mongoose.model( 'chat', chat );
 
 mongoose.Promise = global.Promise;
-var connection = mongoose.createConnection('mongodb://localhost:27017/chat_db', {
-  useMongoClient: true,
-});
+mongoose.connect('localhost', 'chat_db');
+// var connection = mongoose.createConnection('mongodb://localhost:27017/chat_db', {
+//   useMongoClient: true,
+// });
 
 
 // mongoose.connect( 'mongodb://arlen:2iuixigi@localhost:27017/chat_db' );
