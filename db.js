@@ -44,4 +44,5 @@ mongoose.model( 'room', room );
 mongoose.model( 'cate', cate );
 mongoose.model( 'chat', chat );
 
-mongoose.connect( 'mongodb://arlen:2iuixigi@52.192.219.13:27017/chat_db' );
+mongoose.connect( 'mongodb://arlen:2iuixigi@localhost:27017/chat_db' );
+// mongoose.connect( 'mongodb://arlen:2iuixigi@52.192.219.13:27017/chat_db' );
