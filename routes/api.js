@@ -6,6 +6,14 @@ var Room = mongoose.model( 'room');
 var Log = mongoose.model( 'log' );
 var Cate = mongoose.model( 'cate');
 var Chat = mongoose.model( 'chat');
+var User = mongoose.model( 'user');
+
+router.get('/user/find', function(req, res, next) {
+	User.find( function ( err, user, count ){
+		if(err) return res.json({"err":err});
+		res.json(user);
+	});
+});
 
 router.post('/chat/create', function(req, res, next) {
 	console.log("all:",req.body);
@@ -38,10 +46,17 @@ router.get('/cate/create', function(req, res, next) {
 });
 
 router.get('/cate/find', function(req, res, next) {
-	Cate.find( function( err, data, count ){
-		if(err) return res.json({"err":err});
-		res.json(data);
-	});
+	console.log('aaaaaaaaaaaaaaa');
+	try {
+		Cate.find( function( err, data, count ){
+			console.log('ccccccccccccccc');
+			if(err) return res.json({"err":err});
+			res.json(data);
+		});
+
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 router.post('/cate/update', function(req, res, next) {
